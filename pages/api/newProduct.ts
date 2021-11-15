@@ -1,45 +1,25 @@
-
-import { MongoClient } from 'mongodb';
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { username, pass } from '../../mongodbconfig';
-
-// type Data = {
-//     name: string
-// }
-
-const url = `mongodb+srv://${username}:${pass}@cluster0.pvgfd.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-
-const client = new MongoClient(url);
+import { connectToDatabase } from '../../services/database.service';
 
 export default async function handler(
 req: NextApiRequest,
 res: NextApiResponse
 ) {
-    if (req.method === 'POST') {
+  if (req.method === 'POST') {
 
-        const data = req.body;
-    
-        try {
-          await client.connect();
-        } catch (err) {
-          res.status(500).json({ message: 'Could not connect to database.' });
-          return;
-        }
-    
-        const db = client.db();
-    
-        try {
-          await db.collection('products').insertOne(data);
-        } catch (error) {
-          client.close();
-          res.status(500).json({ message: 'Adding product failed!' });
-          return;
-        }
+    const data = req.body;
       
-        client.close();
-    
-        res
-        .status(201)
-        .json({ message: `Successfully added ${data.toString()}`});
-      }
+    try {
+      const { products }  = await connectToDatabase()
+      await products?.insertOne(data);
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ message: 'Adding product failed!' });
+      return;
+    }    
+
+    res
+    .status(201)
+    .json({ message: `Successfully added ${data.toString()}`});
+  }
 }  

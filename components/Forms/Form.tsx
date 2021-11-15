@@ -131,6 +131,13 @@ const Form = (props: FormProps): JSX.Element => {
                             image: values.image,
                             // promotionId: values.hasPromotion ? values.promotionId : null
                         }
+                        await fetch('/api/newProduct', {
+                            method: 'POST',
+                            body: JSON.stringify(newProduct),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }  
+                        });
                         
                         
                     }
@@ -174,10 +181,10 @@ const Form = (props: FormProps): JSX.Element => {
                                     {["Coffee", "Tea", "Milk", "Sweeteners", "Coffee Machines"].map((i: string, index: number) => (<option key={i} value={index + 1}>{i}</option>))}
                                 </Field>
 
-                                <label className="font-semibold my-2" htmlFor="hasPromotion">
+                                {/* <label className="font-semibold my-2" htmlFor="hasPromotion">
                                     <Field className="font-semibold mr-2" htmlFor="hasPromotion" type="checkbox" name="hasPromotion" />
                                     Has promotion
-                                </label>
+                                </label> */}
 
                                 {/* {values.hasPromotion ? promotionInfo : null} */}
 
