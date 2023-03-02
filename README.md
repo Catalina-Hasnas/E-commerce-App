@@ -1,6 +1,6 @@
 # E-commerce App
 
-The E-commerce App is a web application that allows users create a product, display a product and a list of products.
+The E-commerce App is a web application that allows users create a product, display a product and a list of products, using mongodb database with next.js.
 
 To run the E-commerce App locally, follow these steps:
 
@@ -25,4 +25,5 @@ This server requires mongodb credentials to add in the database.service.ts.
 ## Technologies on frontend
 * React.js
 * next.js
+* mongodb
 * Tailwind
