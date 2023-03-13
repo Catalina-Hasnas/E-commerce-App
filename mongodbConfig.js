@@ -1,2 +1,2 @@
-export const username = 'catalinaHasnas';
-export const pass = 'D7HkQlFnYQvC28wW';
+export const username = "exampleUserName";
+export const pass = "examplePass";
